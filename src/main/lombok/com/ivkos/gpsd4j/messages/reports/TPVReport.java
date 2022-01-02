@@ -54,6 +54,12 @@ public class TPVReport extends GpsdMessage
    private LocalDateTime time;
 
    /**
+    * @return Current leap seconds.
+    */
+   @JsonProperty("leapseconds")
+   private Integer leapSeconds;
+
+   /**
     * @return Estimated timestamp error (seconds, 95% confidence). Present if time is present.
     */
    @JsonProperty("ept")
@@ -70,6 +76,18 @@ public class TPVReport extends GpsdMessage
     */
    @JsonProperty("lon")
    private Double longitude;
+
+   /**
+    * @return Altitude, height above ellipsoid, in meters. Probably WGS84.
+    */
+   @JsonProperty("altHAE")
+   private Double altitudeHAE;
+
+   /**
+    * @return MSL Altitude in meters. The geoid used is rarely specified and is often inaccurate. altMSL is altHAE minus geoidSep.
+    */
+   @JsonProperty("altMSL")
+   private Double altitudeMSL;
 
    /**
     * @return Altitude in meters. Present if mode is 3D.
@@ -105,6 +123,18 @@ public class TPVReport extends GpsdMessage
    private Double course;
 
    /**
+    * @return Course over ground, degrees magnetic.
+    */
+   @JsonProperty("magtrack")
+   private Double magneticCourse;
+
+   /**
+    * @return Magnetic variation, degrees. Also known as the magnetic declination (the direction of the horizontal component of the magnetic field measured clockwise from north) in degrees, Positive is West variation. Negative is East variation.
+    */
+   @JsonProperty("magvar")
+   private Double magneticVariation;
+
+   /**
     * @return Speed over ground, meters per second.
     */
    @JsonProperty("speed")
@@ -133,6 +163,72 @@ public class TPVReport extends GpsdMessage
     */
    @JsonProperty("epc")
    private Double climbRateError;
+
+   /**
+    * @return ECEF X position in meters.
+    */
+   @JsonProperty("ecefx")
+   private Double ecefX;
+
+   /**
+    * @return ECEF Y position in meters.
+    */
+   @JsonProperty("ecefy")
+   private Double ecefY;
+
+   /**
+    * @return ECEF Z position in meters.
+    */
+   @JsonProperty("ecefZ")
+   private Double ecefZ;
+
+   /**
+    * @return ECEF X velocity in meters per second.
+    */
+   @JsonProperty("ecefvx")
+   private Double ecefVelocityX;
+
+   /**
+    * @return ECEF Y velocity in meters per second.
+    */
+   @JsonProperty("ecefvy")
+   private Double ecefVelocityY;
+
+   /**
+    * @return ECEF Z velocity in meters per second.
+    */
+   @JsonProperty("ecefvz")
+   private Double ecefVelocityZ;
+
+   /**
+    * @return ECEF position error in meters. Certainty unknown.
+    */
+   @JsonProperty("ecefpAcc")
+   private Double ecefPositionError;
+
+   /**
+    * @return ECEF velocity error in meters per second. Certainty unknown.
+    */
+   @JsonProperty("ecefvAcc")
+   private Double ecefVelocityError;
+
+   /**
+    * @return Geoid separation is the difference between the WGS84 reference ellipsoid and the geoid (Mean Sea Level) in meters. Almost no GNSS receiver specifies how they compute their geoid. gpsd interpolates the geoid from a 5x5 degree table of EGM2008 values when the receiver does not supply a geoid separation. The gpsd computed geoidSep is usually within one meter of the "true" value, but can be off as much as 12 meters.
+    */
+   @JsonProperty("geoidSep")
+   private Double geoidSeparation;
+
+   /**
+    * @return Estimated horizontal Position (2D) Error in meters. Also known as Estimated Position Error (epe). Certainty unknown.
+    */
+   @JsonProperty("eph")
+   private Double horizontalPositionError;
+
+   /**
+    * @return Estimated Spherical (3D) Position Error in meters. Guessed to be 95% confidence, but many GNSS receivers do not specify, so certainty unknown.
+    */
+   @JsonProperty("sep")
+   private Double sphericalPositionError;
 
    @Override
    public String getGpsdClass()

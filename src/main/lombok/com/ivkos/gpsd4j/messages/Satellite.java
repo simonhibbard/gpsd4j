@@ -60,4 +60,23 @@ public class Satellite
     */
    @JsonProperty("used")
    private boolean used;
+
+   /**
+    * @return The GNSS ID, as defined by u-blox, not NMEA. 0=GPS, 2=Galileo, 3=Beidou, 5=QZSS, 6-GLONASS.
+    */
+   @JsonProperty("gnssid")
+   private Integer gnssId;
+
+   /**
+    * @return The satellite ID within its constellation. As defined by u-blox, not NMEA.
+    */
+   @JsonProperty("svid")
+   private Integer satelliteId;
+
+   /**
+    * @return The health of this satellite. 0 is unknown, 1 is OK, and 2 is unhealthy.
+    */
+   @JsonProperty("health")
+   private int health;
+
 }

@@ -108,6 +108,18 @@ public class SKYReport extends GpsdMessage
    private Double hypersphericalDOP;
 
    /**
+    * @return Number of satellite objects in "satellites" array.
+    */
+   @JsonProperty("nSat")
+   private Double totalSatellites;
+
+   /**
+    * @return Number of satellites used in navigation solution.
+    */
+   @JsonProperty("uSat")
+   private Double usedSatellites;
+
+   /**
     * @return List of satellite objects in skyview
     */
    public List<Satellite> getSatellites()
